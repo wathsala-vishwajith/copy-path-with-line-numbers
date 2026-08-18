@@ -14,8 +14,25 @@
   "contributes": {
     "commands": [
       {
-        "command": "copy-path-with-line-numbers.helloWorld",
-        "title": "Hello World"
+        "command": "copyRelativePathWithLines.copy",
+        "title": "Copy Relative Path with Line Number(s)"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "copyRelativePathWithLines.copy",
+          "when": "editorTextFocus",
+          "group": "9_copypath"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "copyRelativePathWithLines.copy",
+        "key": "ctrl+alt+c",
+        "mac": "cmd+alt+c",
+        "when": "editorTextFocus"
       }
     ]
   },

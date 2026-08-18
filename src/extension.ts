@@ -19,8 +19,15 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInformationMessage('Hello World from Copy Path with Line Numbers!');
 	});
 
+	const disposable2 = vscode.commands.registerCommand('copyRelativePathWithLines.copy', () => {
+		// Implementation for copying relative path with line numbers
+		vscode.window.showInformationMessage('Copying relative path with line numbers...');
+	});
+
 	context.subscriptions.push(disposable);
+	context.subscriptions.push(disposable2);
 }
+
 
 // This method is called when your extension is deactivated
 export function deactivate() {}
