@@ -3,12 +3,16 @@
   "displayName": "Copy Path with Line Numbers",
   "description": "Copy relative/absolute path of a file with line numbers.",
   "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.125.0"
-  },
+  "publisher": "WathsalaVishwajith",
+  "repository": {"type": "git", "url": "https://github.com/wathsala-vishwajith/copy-path-with-line-numbers"},
+  "icon": "icons/icon.png",
   "categories": [
     "Other"
   ],
+  "keywords": ["copy path", "copy line numbers", "line numbers", "clipboard", "markdown copy"],
+  "engines": {
+    "vscode": "^1.125.0"
+  },
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
