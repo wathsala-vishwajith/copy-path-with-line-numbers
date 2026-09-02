@@ -1,15 +1,21 @@
 import * as assert from 'assert';
-
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
 import * as vscode from 'vscode';
-// import * as myExtension from '../../extension';
+import { formatSelections } from '../extension';
 
-suite('Extension Test Suite', () => {
-	vscode.window.showInformationMessage('Start all tests.');
+suite('formatSelections', () => {
+  test('single cursor, no selection', () => {
+    const sel = new vscode.Selection(4, 0, 4, 0);
+    assert.deepStrictEqual(formatSelections([sel]), ['5']);
+  });
 
-	test('Sample test', () => {
-		assert.strictEqual(-1, [1, 2, 3].indexOf(5));
-		assert.strictEqual(-1, [1, 2, 3].indexOf(0));
-	});
+  test('single range', () => {
+    const sel = new vscode.Selection(2, 0, 5, 10);
+    assert.deepStrictEqual(formatSelections([sel]), ['3~6']);
+  });
+
+  test('multiple selections, sorted', () => {
+    const a = new vscode.Selection(10, 0, 10, 0);
+    const b = new vscode.Selection(1, 0, 3, 0);
+    assert.deepStrictEqual(formatSelections([a, b]), ['2~3', '11']);
+  });
 });
