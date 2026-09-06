@@ -24,7 +24,11 @@
       {
       "command": "copyRelativePathWithLines.copyWithLineNumbers",
       "title": "Copy Code with Line Numbers"
-    }
+      },
+      {
+      "command": "copyRelativePathWithLines.copyWithLineNumbersCodeBlock",
+      "title": "Copy Code with Line Numbers (Markdown Code Block)"
+      }
     ],
     "menus": {
       "editor/context": [
@@ -37,6 +41,11 @@
         "command": "copyRelativePathWithLines.copyWithLineNumbers",
         "when": "editorTextFocus",
         "group": "9_copypath@2"
+      },
+      {
+        "command": "copyRelativePathWithLines.copyWithLineNumbersCodeBlock",
+        "when": "editorTextFocus",
+        "group": "9_copypath@3"
       }
       ]
     },
@@ -51,6 +60,12 @@
       "command": "copyRelativePathWithLines.copyWithLineNumbers",
       "key": "ctrl+alt+l",
       "mac": "cmd+alt+l",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "copyRelativePathWithLines.copyWithLineNumbersCodeBlock",
+      "key": "ctrl+alt+m",
+      "mac": "cmd+alt+m",
       "when": "editorTextFocus"
     }
     ]

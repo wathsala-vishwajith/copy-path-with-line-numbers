@@ -47,7 +47,20 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 	});
 
+	const copyCodeBlockDisposable = vscode.commands.registerCommand('copyRelativePathWithLines.copyWithLineNumbersCodeBlock', () => {
+		const editor = vscode.window.activeTextEditor;
+		if (!editor) {
+			vscode.window.showErrorMessage('No active editor found.');
+			return;
+		}
+		const formattedText = getFormattedTextForSelections(editor);
+		const codeBlock = `\`\`\`\n${formattedText}\n\`\`\``;
 
+		vscode.env.clipboard.writeText(codeBlock).then(() => {
+			vscode.window.setStatusBarMessage(`Copied code block with line numbers to clipboard!`, 3000);
+		});
+	});
+	context.subscriptions.push(copyCodeBlockDisposable);
 	context.subscriptions.push(copyCodeDisposable);
 	context.subscriptions.push(copyPathDisposable);
 }
