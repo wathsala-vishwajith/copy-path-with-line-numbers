@@ -20,24 +20,39 @@
       {
         "command": "copyRelativePathWithLines.copy",
         "title": "Copy Relative Path with Line Number(s)"
-      }
+      },
+      {
+      "command": "copyRelativePathWithLines.copyWithLineNumbers",
+      "title": "Copy Code with Line Numbers"
+    }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "copyRelativePathWithLines.copy",
-          "when": "editorTextFocus",
-          "group": "9_copypath"
-        }
+        "command": "copyRelativePathWithLines.copy",
+        "when": "editorTextFocus",
+        "group": "9_copypath@1"
+      },
+      {
+        "command": "copyRelativePathWithLines.copyWithLineNumbers",
+        "when": "editorTextFocus",
+        "group": "9_copypath@2"
+      }
       ]
     },
     "keybindings": [
       {
-        "command": "copyRelativePathWithLines.copy",
-        "key": "ctrl+alt+c",
-        "mac": "cmd+alt+c",
-        "when": "editorTextFocus"
-      }
+      "command": "copyRelativePathWithLines.copy",
+      "key": "ctrl+alt+c",
+      "mac": "cmd+alt+c",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "copyRelativePathWithLines.copyWithLineNumbers",
+      "key": "ctrl+alt+l",
+      "mac": "cmd+alt+l",
+      "when": "editorTextFocus"
+    }
     ]
   },
   "scripts": {
