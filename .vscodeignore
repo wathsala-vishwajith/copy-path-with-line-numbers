@@ -12,3 +12,6 @@ vsc-extension-quickstart.md
 **/*.map
 **/*.ts
 **/.vscode-test.*
+.pnpm-store/**
+pnpm-lock.yaml
+pnpm-workspace.yaml
