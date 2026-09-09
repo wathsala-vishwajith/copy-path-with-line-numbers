@@ -15,3 +15,5 @@ vsc-extension-quickstart.md
 .pnpm-store/**
 pnpm-lock.yaml
 pnpm-workspace.yaml
+.secretlintrc
+.npmrc
