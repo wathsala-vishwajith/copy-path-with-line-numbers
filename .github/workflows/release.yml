@@ -1,0 +1,87 @@
+name: Build and Release Extension
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'          # triggers on tags like v0.0.1, v1.2.3
+
+permissions:
+  contents: write         # needed to create releases and upload assets
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── 1. Checkout ────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── 2. Setup pnpm (must come BEFORE setup-node) ───────────────────────
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest           
+
+      # ── 3. Set up Node.js ──────────────────────────────────────────────────
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'             # ← was 'npm'
+
+      # ── 4. Install dependencies ────────────────────────────────────────────
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile 
+
+      # ── 4. Run tests ───────────────────────────────────────────────────────
+      - name: Run tests
+        uses: coactions/setup-xvfb@v1    # VS Code test runner needs a display
+        with:
+          run: npm test
+
+      # ── 5. Production build ────────────────────────────────────────────────
+      - name: Run tests
+        uses: coactions/setup-xvfb@v1
+        with:
+          run: pnpm test         
+
+      # ── 6. Package into .vsix ──────────────────────────────────────────────
+      - name: Package extension
+        run: npx @vscode/vsce package --no-dependencies
+
+      # ── 7. Get the .vsix filename and tag version ──────────────────────────
+      - name: Get asset info
+        id: asset
+        run: |
+          VSIX_FILE=$(ls *.vsix)
+          echo "path=${VSIX_FILE}" >> $GITHUB_OUTPUT
+          echo "name=${VSIX_FILE}" >> $GITHUB_OUTPUT
+          # Strip the leading 'v' from the tag for display (v0.0.2 → 0.0.2)
+          echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      # ── 8. Create the GitHub release and attach the .vsix ─────────────────
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          body: |
+            ## Install
+
+            **From VS Code:**
+            1. Download `${{ steps.asset.outputs.name }}` below
+            2. Open VS Code → Extensions → `···` menu → *Install from VSIX…*
+
+            **From the command line:**
+            ```bash
+            code --install-extension ${{ steps.asset.outputs.name }}
+            ```
+
+            See [CHANGELOG.md](./CHANGELOG.md) for what changed in this release.
+          files: ${{ steps.asset.outputs.path }}
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          # tags like v1.0.0-beta.1 are automatically marked as pre-release
+          generate_release_notes: true
+          # auto-appends GitHub's generated notes (commit list) after your body
