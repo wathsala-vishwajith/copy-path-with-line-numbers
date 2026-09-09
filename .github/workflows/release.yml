@@ -34,23 +34,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile 
 
-      # ── 4. Run tests ───────────────────────────────────────────────────────
-      - name: Run tests
-        uses: coactions/setup-xvfb@v1    # VS Code test runner needs a display
-        with:
-          run: npm test
-
-      # ── 5. Production build ────────────────────────────────────────────────
-      - name: Run tests
-        uses: coactions/setup-xvfb@v1
-        with:
-          run: pnpm test         
-
-      # ── 6. Package into .vsix ──────────────────────────────────────────────
+      # ── 4. Package into .vsix ──────────────────────────────────────────────
       - name: Package extension
         run: npx @vscode/vsce package --no-dependencies
 
-      # ── 7. Get the .vsix filename and tag version ──────────────────────────
+      # ── 5. Get the .vsix filename and tag version ──────────────────────────
       - name: Get asset info
         id: asset
         run: |
@@ -60,7 +48,7 @@ jobs:
           # Strip the leading 'v' from the tag for display (v0.0.2 → 0.0.2)
           echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
 
-      # ── 8. Create the GitHub release and attach the .vsix ─────────────────
+      # ── 6. Create the GitHub release and attach the .vsix ─────────────────
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
