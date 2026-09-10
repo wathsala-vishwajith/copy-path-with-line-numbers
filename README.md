@@ -1,6 +1,6 @@
 # Copy Path with Line Numbers
 
-A VS Code extension that gives you three clipboard commands for sharing precise code references — perfect for GitHub comments, code reviews, and pair programming.
+A VS Code extension that gives you four clipboard commands for sharing precise code references — perfect for GitHub comments, code reviews, and pair programming.
 
 ---
 ## Demo
@@ -34,7 +34,28 @@ src/utils/parser.ts:10-24,38,55-60
 
 ---
 
-### 2 · Copy Code with Line Numbers
+### 2 · Copy Absolute Path with Line Number(s)
+
+Copies the full filesystem path appended with the current cursor line or selection range(s).
+
+**Single cursor (no selection)**
+```
+/Users/alice/projects/app/src/utils/parser.ts:42
+```
+
+**Single range selection**
+```
+/Users/alice/projects/app/src/utils/parser.ts:10-24
+```
+
+**Multiple non-contiguous selections (multi-cursor)**
+```
+/Users/alice/projects/app/src/utils/parser.ts:10-24,38,55-60
+```
+
+---
+
+### 3 · Copy Code with Line Numbers
 
 Copies the selected code to the clipboard with right-aligned, padded line numbers prepended to every line.
 
@@ -51,7 +72,7 @@ Copies the selected code to the clipboard with right-aligned, padded line number
 
 ---
 
-### 3 · Copy Code with Line Numbers (Markdown Code Block)
+### 4 · Copy Code with Line Numbers (Markdown Code Block)
 
 Same as the command above, but wraps the output in a fenced Markdown code block:
 
@@ -72,10 +93,31 @@ Ready to paste directly into GitHub pull-request comments, issues, or any Markdo
 | Command | Windows / Linux | macOS |
 |---|---|---|
 | Copy Relative Path with Line Number(s) | `Ctrl+Alt+C` | `Cmd+Alt+C` |
+| Copy Absolute Path with Line Number(s) | `Ctrl+Alt+A` | `Cmd+Alt+A` |
 | Copy Code with Line Numbers | `Ctrl+Alt+L` | `Cmd+Alt+L` |
 | Copy Code with Line Numbers (Markdown Code Block) | `Ctrl+Alt+M` | `Cmd+Alt+M` |
 
-All three commands are also available from the **editor right-click context menu** under the `9_copypath` group.
+All commands are also available from the **editor right-click context menu** under the `9_copypath` group.
+
+---
+
+## Installation
+
+You can install the extension from a `.vsix` file using either of the following methods:
+
+### 1. From VS Code GUI
+1. Download the latest `.vsix` release from the [Releases](https://github.com/wathsala-vishwajith/copy-path-with-line-numbers/releases) page.
+2. Open VS Code and open the **Extensions** view (`Ctrl+Shift+X` or `Cmd+Shift+X`).
+3. Click the **`···`** (Views and More Actions) menu at the top-right of the Extensions view.
+4. Select **Install from VSIX...**.
+5. Choose the downloaded `.vsix` file to install.
+
+### 2. From the Command Line
+Run the following command in your terminal:
+
+```bash
+code --install-extension <path-to-vsix-file>
+```
 
 ---
 
