@@ -2,17 +2,9 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "copy-path-with-line-numbers" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
 
 	const copyPathDisposable = vscode.commands.registerCommand('copyRelativePathWithLines.copy', () => {
 		// Implementation for copying relative path with line numbers
@@ -27,6 +19,23 @@ export function activate(context: vscode.ExtensionContext) {
 
 		const ranges = formatSelections(editor.selections);
 		const result = `${relativePath}:${ranges.join(',')}`;
+
+		vscode.env.clipboard.writeText(result).then(() => {
+			vscode.window.setStatusBarMessage(`Copied to clipboard!`, 3000);
+		});
+	});
+
+	const copyAbsolutePathDisposable = vscode.commands.registerCommand('copyRelativePathWithLines.copyAbsolute', () => {
+		// Implementation for copying absolute path with line numbers
+		const editor = vscode.window.activeTextEditor;
+		if (!editor) {
+			vscode.window.showErrorMessage('No active editor found.');
+			return;
+		}
+		const absolutePath = editor.document.uri.fsPath;
+
+		const ranges = formatSelections(editor.selections);
+		const result = `${absolutePath}:${ranges.join(',')}`;
 
 		vscode.env.clipboard.writeText(result).then(() => {
 			vscode.window.setStatusBarMessage(`Copied to clipboard!`, 3000);
@@ -63,6 +72,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(copyCodeBlockDisposable);
 	context.subscriptions.push(copyCodeDisposable);
 	context.subscriptions.push(copyPathDisposable);
+	context.subscriptions.push(copyAbsolutePathDisposable);
 }
 
 export function formatSelections(selections: readonly vscode.Selection[]): string[] {

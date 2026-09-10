@@ -2,7 +2,7 @@
   "name": "copy-path-with-line-numbers",
   "displayName": "Copy Path with Line Numbers",
   "description": "Copy relative/absolute path of a file with line numbers.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "WathsalaV",
   "repository": {
     "type": "git",
@@ -27,6 +27,10 @@
   "contributes": {
     "commands": [
       {
+        "command": "copyRelativePathWithLines.copyAbsolute",
+        "title": "Copy Absolute Path with Line Number(s)"
+      },
+      {
         "command": "copyRelativePathWithLines.copy",
         "title": "Copy Relative Path with Line Number(s)"
       },
@@ -47,6 +51,11 @@
           "group": "9_copypath@1"
         },
         {
+          "command": "copyRelativePathWithLines.copyAbsolute",
+          "when": "editorTextFocus",
+          "group": "9_copypath@1"
+        },
+        {
           "command": "copyRelativePathWithLines.copyWithLineNumbers",
           "when": "editorTextFocus",
           "group": "9_copypath@2"
@@ -63,6 +72,12 @@
         "command": "copyRelativePathWithLines.copy",
         "key": "ctrl+alt+c",
         "mac": "cmd+alt+c",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "copyRelativePathWithLines.copyAbsolute",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+alt+a",
         "when": "editorTextFocus"
       },
       {

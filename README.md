@@ -3,6 +3,11 @@
 A VS Code extension that gives you three clipboard commands for sharing precise code references — perfect for GitHub comments, code reviews, and pair programming.
 
 ---
+## Demo
+
+![Demo of Copy Path with Line Numbers extension](images/demo.gif)
+
+---
 
 ## Features
 
@@ -91,6 +96,9 @@ This extension does not contribute any VS Code settings.
 
 See the full [CHANGELOG](CHANGELOG.md) for a detailed history.
 
+### 0.0.4
+Added **Copy Absolute Path with Line Number(s)** command — copies the absolute file path with line numbers, similar to the relative path command.
+ 
 ### 0.0.3
 Added the **Copy Code with Line Numbers (Markdown Code Block)** command — wraps line-numbered code in a fenced ` ``` ` block.
 

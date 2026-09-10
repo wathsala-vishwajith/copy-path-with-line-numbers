@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.0.4] – 2026-09-10
+
+- Added **Copy Absolute Path with Line Number(s)** command (`copyRelativePathWithLines.copyAbsolute`)  
+  Copies the absolute file path followed by the current cursor line or selection range(s) in the format `/absolute/path/to/file.ts:5` or `/absolute/path/to/file.ts:3-6,11`.  
+  - Supports multiple, non-contiguous selections (multi-cursor).  
+  - Duplicate and overlapping ranges are deduplicated and sorted.  
+  - Edge case: a selection that ends exactly at column 0 of the next line does not include that trailing line in the range.
+
 ## [0.0.3] – 2026-09-06
 
 ### Added
